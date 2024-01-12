@@ -1,16 +1,19 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "gtceubloom",
+  "name": "GTCEu Bloom Unofficial",
+  "description": "bright",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["CleanroomMC"],
-  "credits": "Authors of this project",
+  "authorList": ["Stone"],
+  "credits": "All people involved in GTCEu, all code is stolen from them",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [
+  "codechickenlib"
+  ],
+  "clientSideOnly": "true"
 }
 ]
