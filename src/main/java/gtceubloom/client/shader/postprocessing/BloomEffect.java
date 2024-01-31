@@ -1,9 +1,9 @@
 package gtceubloom.client.shader.postprocessing;
 
+import gtceubloom.client.ConfigHolder;
 import gtceubloom.client.shader.PingPongBuffer;
 import gtceubloom.client.shader.Shaders;
 import gtceubloom.client.utils.RenderUtil;
-import gtceubloom.common.ConfigHolder;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
@@ -19,11 +19,11 @@ public class BloomEffect {
     private static Framebuffer[] downSampleFBO;
     private static Framebuffer[] upSampleFBO;
 
-    public static float strength = (float) ConfigHolder.client.shader.strength;
-    public static float baseBrightness = (float) ConfigHolder.client.shader.baseBrightness;
-    public static float highBrightnessThreshold = (float) ConfigHolder.client.shader.highBrightnessThreshold;
-    public static float lowBrightnessThreshold = (float) ConfigHolder.client.shader.lowBrightnessThreshold;
-    public static float step = (float) ConfigHolder.client.shader.step;
+    public static float strength = (float) ConfigHolder.shader.strength;
+    public static float baseBrightness = (float) ConfigHolder.shader.baseBrightness;
+    public static float highBrightnessThreshold = (float) ConfigHolder.shader.highBrightnessThreshold;
+    public static float lowBrightnessThreshold = (float) ConfigHolder.shader.lowBrightnessThreshold;
+    public static float step = (float) ConfigHolder.shader.step;
 
     private static void blend(Framebuffer bloom, Framebuffer backgroundFBO) {
         // bind main fbo
@@ -56,7 +56,7 @@ public class BloomEffect {
     }
 
     private static void cleanUP(int lastWidth, int lastHeight) {
-        if (downSampleFBO == null || downSampleFBO.length != ConfigHolder.client.shader.nMips) {
+        if (downSampleFBO == null || downSampleFBO.length != ConfigHolder.shader.nMips) {
             if (downSampleFBO != null) {
                 for (int i = 0; i < downSampleFBO.length; i++) {
                     downSampleFBO[i].deleteFramebuffer();
@@ -64,13 +64,13 @@ public class BloomEffect {
                 }
             }
 
-            downSampleFBO = new Framebuffer[ConfigHolder.client.shader.nMips];
-            upSampleFBO = new Framebuffer[ConfigHolder.client.shader.nMips];
+            downSampleFBO = new Framebuffer[ConfigHolder.shader.nMips];
+            upSampleFBO = new Framebuffer[ConfigHolder.shader.nMips];
 
             int resX = lastWidth / 2;
             int resY = lastHeight / 2;
 
-            for (int i = 0; i < ConfigHolder.client.shader.nMips; i++) {
+            for (int i = 0; i < ConfigHolder.shader.nMips; i++) {
                 downSampleFBO[i] = new Framebuffer(resX, resY, false);
                 upSampleFBO[i] = new Framebuffer(resX, resY, false);
                 downSampleFBO[i].setFramebufferColor(0, 0, 0, 0);
@@ -83,7 +83,7 @@ public class BloomEffect {
         } else if (RenderUtil.updateFBOSize(downSampleFBO[0], lastWidth / 2, lastHeight / 2)) {
             int resX = lastWidth / 2;
             int resY = lastHeight / 2;
-            for (int i = 0; i < ConfigHolder.client.shader.nMips; i++) {
+            for (int i = 0; i < ConfigHolder.shader.nMips; i++) {
                 RenderUtil.updateFBOSize(downSampleFBO[i], resX, resY);
                 RenderUtil.updateFBOSize(upSampleFBO[i], resX, resY);
                 downSampleFBO[i].setFramebufferFilter(GL11.GL_LINEAR);

@@ -1,10 +1,10 @@
 package gtceubloom.client.utils;
 
 import gtceubloom.api.util.GTLog;
+import gtceubloom.client.ConfigHolder;
 import gtceubloom.client.shader.Shaders;
 import gtceubloom.client.shader.postprocessing.BloomEffect;
 import gtceubloom.client.shader.postprocessing.BloomType;
-import gtceubloom.common.ConfigHolder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -180,7 +180,7 @@ public class BloomEffectUtil {
 
         EffectRenderContext context = EffectRenderContext.getInstance().update(entity, (float) partialTicks);
 
-        if (!ConfigHolder.client.shader.emissiveTexturesBloom) {
+        if (!ConfigHolder.shader.emissiveTexturesBloom) {
             GlStateManager.depthMask(true);
             renderGlobal.renderBlockLayer(bloom, partialTicks, pass, entity);
             GlStateManager.depthMask(false);
@@ -246,12 +246,12 @@ public class BloomEffectUtil {
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         // render bloom effect to fbo
-        BloomEffect.strength = (float) ConfigHolder.client.shader.strength;
-        BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.baseBrightness;
-        BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.highBrightnessThreshold;
-        BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.lowBrightnessThreshold;
-        BloomEffect.step = (float) ConfigHolder.client.shader.step;
-        switch (ConfigHolder.client.shader.bloomStyle) {
+        BloomEffect.strength = (float) ConfigHolder.shader.strength;
+        BloomEffect.baseBrightness = (float) ConfigHolder.shader.baseBrightness;
+        BloomEffect.highBrightnessThreshold = (float) ConfigHolder.shader.highBrightnessThreshold;
+        BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.shader.lowBrightnessThreshold;
+        BloomEffect.step = (float) ConfigHolder.shader.step;
+        switch (ConfigHolder.shader.bloomStyle) {
             case 0 -> BloomEffect.renderLOG(bloomFBO, fbo);
             case 1 -> BloomEffect.renderUnity(bloomFBO, fbo);
             case 2 -> BloomEffect.renderUnreal(bloomFBO, fbo);

@@ -1,7 +1,7 @@
 package gtceubloom.client.utils;
 
+import gtceubloom.client.ConfigHolder;
 import gtceubloom.client.shader.Shaders;
-import gtceubloom.common.ConfigHolder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -40,7 +40,7 @@ public class DepthTextureUtil {
     private static int lastWidth, lastHeight;
 
     private static boolean shouldRenderDepthTexture() {
-        return lastBind && !Shaders.isOptiFineShaderPackLoaded() && ConfigHolder.client.hookDepthTexture &&
+        return lastBind && !Shaders.isOptiFineShaderPackLoaded() && ConfigHolder.hookDepthTexture &&
                 OpenGlHelper.isFramebufferEnabled();
     }
 

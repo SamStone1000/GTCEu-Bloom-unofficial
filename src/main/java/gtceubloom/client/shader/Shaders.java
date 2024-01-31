@@ -2,7 +2,7 @@ package gtceubloom.client.shader;
 
 import gtceubloom.api.GTValues;
 import gtceubloom.api.util.GTLog;
-import gtceubloom.common.ConfigHolder;
+import gtceubloom.client.ConfigHolder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -125,7 +125,7 @@ public class Shaders {
     }
 
     public static boolean allowedShader() {
-        return OpenGlHelper.shadersSupported && ConfigHolder.client.shader.useShader;
+        return OpenGlHelper.shadersSupported && ConfigHolder.shader.useShader;
     }
 
     public static boolean isOptiFineShaderPackLoaded() {
